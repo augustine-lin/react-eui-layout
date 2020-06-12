@@ -1,0 +1,9 @@
+@tailwind base;
+
+body { @apply h-full m-0 }
+#root { @apply h-full }
+
+@tailwind components;
+
+@tailwind utilities;
+

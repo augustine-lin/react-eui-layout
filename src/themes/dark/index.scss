@@ -1,0 +1,7 @@
+@import './color.scss';
+
+// Global styling
+@import '../../../node_modules/@elastic/eui/src/global_styling/functions/index';
+
+// Components
+@import '../../../node_modules/@elastic/eui/src/components/index'
