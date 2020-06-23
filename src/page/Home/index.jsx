@@ -7,8 +7,7 @@ import {
   EuiPageContentHeaderSection,
   EuiPageHeader,
   EuiPageHeaderSection,
-  EuiTitle,
-  EuiErrorBoundary,
+  EuiTitle
 } from '@elastic/eui'
 
 function Home() {

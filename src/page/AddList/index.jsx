@@ -7,9 +7,8 @@ import {
   EuiPageContentHeaderSection,
   EuiPageHeader,
   EuiPageHeaderSection,
-  EuiTitle,
+  EuiTitle
 } from '@elastic/eui'
-
 
 function AddList() {
   return (
