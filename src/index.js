@@ -1,16 +1,25 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+// import '@elastic/eui/dist/eui_theme_light.css'
+
 import './assets/css/index.css'
 import './themes/light/index.scss'
-// import '@elastic/eui/dist/eui_theme_light.css'
+
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
+// https://github.com/elastic/eui/issues/3437
+// 暫時關閉 StrictMode 因為eui有些元件會出錯
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root'),
+// )
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root'),
+  <App />,
+  document.getElementById('root')
 )
 
 // If you want your app to work offline and load faster, you can change

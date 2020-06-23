@@ -4,6 +4,8 @@ import {
   Switch,
   Route,
   useHistory,
+  useLocation,
+  Redirect
 } from 'react-router-dom'
 import {
   EuiPage,
@@ -12,7 +14,7 @@ import {
   EuiSideNav,
   EuiHeader,
   EuiIcon,
-  EuiHeaderSectionItem,
+  EuiHeaderSectionItem
 } from '@elastic/eui'
 import { ReactComponent as LogoIcon } from './assets/image/trident.svg'
 import Home from './page/Home'
@@ -20,7 +22,6 @@ import List from './page/List'
 import AddList from './page/AddList'
 
 import './App.css'
-
 
 function Header() {
   const history = useHistory()
@@ -36,6 +37,12 @@ function Header() {
   )
 }
 
+const mainPageList = [
+  { name: 'Home', path: '/', component: <Home /> },
+  { name: 'List', path: '/list', component: <List /> },
+  { name: 'Add', path: '/add', component: <AddList /> }
+]
+
 function SideBar() {
   const [isSideNavOpenOnMobile, setisSideNavOpenOnMobile] = useState(false)
 
@@ -43,33 +50,25 @@ function SideBar() {
     setisSideNavOpenOnMobile(!isSideNavOpenOnMobile)
   }
   const history = useHistory()
+  const location = useLocation()
 
   function handleClick(path) {
     history.push(path)
   }
 
+  const items = mainPageList.map((router, index) => ({
+    name: router.name,
+    id: index,
+    onClick: () => handleClick(router.path),
+    isSelected: location.pathname === router.path
+  }))
+
   const sideNav = [
     {
       name: '主要頁面',
       id: 0,
-      items: [
-        {
-          name: 'Home',
-          id: 1,
-          onClick: () => handleClick('/'),
-        },
-        {
-          name: 'List',
-          id: 2,
-          onClick: () => history.push('/list'),
-        },
-        {
-          name: 'Add',
-          id: 3,
-          onClick: () => history.push('/add'),
-        },
-      ],
-    },
+      items
+    }
   ]
   return (
     <EuiPageSideBar className="sideBar">
@@ -89,18 +88,16 @@ function Layout() {
       <Header />
       <EuiPage className="page">
         <SideBar />
-        <EuiPageBody component="div">
+        <EuiPageBody component="div" className="relative">
           <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/list">
-              <List />
-            </Route>
-            <Route path="/add">
-              <AddList />
-            </Route>
-            <Route path="/:id" render={() => (<p> I want this text to show up for all routes other than /, /products and /category </p>)} />
+            {
+              mainPageList.map((router) => (
+                <Route key={router.path} exact path={router.path}>
+                  {router.component}
+                </Route>
+              ))
+            }
+            <Redirect from="*" to="/" />
           </Switch>
         </EuiPageBody>
       </EuiPage>
