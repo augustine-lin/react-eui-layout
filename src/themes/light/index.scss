@@ -1,7 +1,7 @@
 @import './color.scss';
 
+$euiSize: 14px;
 // Global styling
-@import '../../../node_modules/@elastic/eui/src/global_styling/functions/index';
-
+@import '../../../node_modules/@elastic/eui/src/global_styling/index.scss';
 // Components
-@import '../../../node_modules/@elastic/eui/src/components/index'
+@import '../../../node_modules/@elastic/eui/src/components/index.scss'
